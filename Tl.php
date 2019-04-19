@@ -10,13 +10,14 @@ class Tl
         $url        = 'https://api.telegram.org/bot';
         $url        .= $this->token . '/';
         $url        .= $method . '/';
-        $context    = stream_context_create([
-            'https' => [
-                'method' => 'GET',
-                'content' => http_build_query($params)
-            ]
-        ]);
-        $result =  file_get_contents($url, false, $context);
+        if(!empty($params)) {
+            $k = 0;
+            foreach($params as $key=>$value) {
+                $url .= ($k == 0 ? '?' : '&') . $key . '=' . $value;
+                $k++;
+            }
+        }
+        $result =  file_get_contents($url);
         return json_encode($result);
     }
 
