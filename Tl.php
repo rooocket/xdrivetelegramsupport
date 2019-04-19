@@ -16,8 +16,8 @@ class Tl
 //                'content' => http_build_query($params)
 //            ]
 //        ]);
-        $result =  file_get_contents('http://drive2.batester.ru/promo/index.php');
-        return json_encode($result);
+        $result =  file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getMe');
+        return $result;
     }
 
     public function getUpdates() {
