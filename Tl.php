@@ -24,7 +24,7 @@ class Tl
 
     public function getUpdates() {
         $response = $this->query('getUpdates');
-        return $response;
+        return json_decode($response);
     }
 
     public function sendMessage($chat_id, $text) {
