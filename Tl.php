@@ -28,6 +28,7 @@ class Tl
     }
 
     public function sendMessage($chat_id, $text) {
+        //send
         $response = $this->query('sendMessage',
             [
                 'text' => $text,
