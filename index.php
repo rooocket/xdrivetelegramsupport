@@ -5,12 +5,16 @@ include("Tl.php");
 
 $telegramAPI = new Tl();
 
+while(true) {
+
 //Получаем сообщения
-$updates = $telegramAPI->getUpdates();
+    $updates = $telegramAPI->getUpdates();
 
 //Проходим по сообщения
-foreach($updates as $update) {
-    $telegramAPI->sendMessage($update->message->chat->id, 'This time ' . date('H.i.s', time()));
+    foreach($updates as $update) {
+        $telegramAPI->sendMessage($update->message->chat->id, 'This time ' . date('H.i.s', time()));
+    }
+
 }
 
 //$telegramAPI->sendMessage(293854654, 'Hello');

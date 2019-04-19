@@ -5,9 +5,17 @@ class Tl
 {
 
     private $url     = 'https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
+    protected $updateId;
 
     public function getUpdates() {
-        $response = json_decode(file_get_contents($this->url . '/getUpdates'));
+
+
+        $response = json_decode(file_get_contents($this->url . '/getUpdates?offset=' . $this->updateId));
+
+        if(!empty($response->result)) {
+            $this->updateId = $response->result[count($response->result) - 1]->update_id;
+        }
+
         return $response->result;
     }
 
