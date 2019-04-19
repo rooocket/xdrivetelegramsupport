@@ -24,7 +24,7 @@ class Tl
 
     public function getUpdates() {
         $response = $this->query('getUpdates');
-        return $response->result;
+        return $response;
     }
 
     public function sendMessage($chat_id, $text) {
@@ -35,7 +35,7 @@ class Tl
                 'parse_mode' => 'html'
             ]
         );
-        return $response->result;
+        return $response;
     }
 
 }
