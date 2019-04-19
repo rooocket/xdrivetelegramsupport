@@ -19,7 +19,7 @@ class Tl
         }
 
         $result = fopen($url,"r");
-        return json_decode($result);
+        return $result;
     }
 
     public function getUpdates() {
@@ -35,7 +35,7 @@ class Tl
                 'parse_mode' => 'html'
             ]
         );
-
+        return $response->result;
     }
 
 }
