@@ -23,7 +23,7 @@ class Tl
     }
 
     public function getUpdates() {
-        $response = json_decode($this->query('getUpdates'));
+        $response = $this->query('getUpdates');
         return $response;
     }
 
