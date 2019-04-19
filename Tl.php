@@ -11,7 +11,7 @@ class Tl
         $url        .= $this->token . '/';
         $url        .= $method . '/';
         $context    = stream_context_create([
-            'http' => [
+            'https' => [
                 'method' => 'GET',
                 'content' => http_build_query($params)
             ]
