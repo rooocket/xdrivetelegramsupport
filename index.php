@@ -4,9 +4,11 @@ error_reporting(E_ALL);
 include("Tl.php");
 
 $telegramAPI = new Tl();
+
+//Получаем сообщения
 $updates = $telegramAPI->getUpdates();
 
-echo '==<br>' . date('H.i:s', time()) . '<br>';
-
-
-var_dump($updates);
+//Проходим по сообщения
+foreach($updates as $update) {
+    $telegramAPI->sendMessage($update->message->chat->id, 'Hello');
+}

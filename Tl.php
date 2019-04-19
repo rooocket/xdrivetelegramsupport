@@ -18,15 +18,19 @@ class Tl
             }
         }
         $result =  file_get_contents($url);
-        return '=====================================' . json_encode($result); //json-request
+        return json_decode($result); //json-request
     }
 
     public function getUpdates() {
         $response = $this->query('getUpdates');
-        return $response;
+        return $response->result;
     }
 
-    public function getMessage() {
+    public function sendMessage($chat_id, $text) {
+        $this->query('sendMessage',[
+           'text' => $text,
+            'chat_id' => $chat_id
+        ]);
 
     }
 
