@@ -17,7 +17,8 @@ class Tl
                 $k++;
             }
         }
-        $result =  file_get_contents($url);
+        //$result =  file_get_contents($url);
+        $result = fopen("https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/sendMessage?chat_id=293854654&parse_mode=html&text='hello'","r");
         return json_decode($result); //json-request
     }
 
@@ -29,7 +30,7 @@ class Tl
     public function sendMessage($chat_id, $text) {
         $this->query('sendMessage',[
            'text' => $text,
-            'chat_id' => '@' . $chat_id
+           'chat_id' => $chat_id
         ]);
 
     }
