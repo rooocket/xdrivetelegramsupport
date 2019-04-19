@@ -7,7 +7,7 @@ class Tl
     private $url     = 'https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 
     public function getUpdates() {
-        $response = $this->url . '/getUpdates';
+        $response = file_get_contents($this->url . '/getUpdates');
         return json_decode($response);
     }
 
