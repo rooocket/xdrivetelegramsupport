@@ -18,7 +18,8 @@ while(true) {
     echo '</pre>';
 //Проходим по сообщения
     foreach($updates as $update) {
-        $telegramAPI->sendMessage($update->message->chat->id, 'This time ' . date('H.i.s', time()));
+        $text = 'Ты мне написал: ' . $update->message->chat->text;
+        $telegramAPI->sendMessage($update->message->chat->id, $text);
     }
 
 }
