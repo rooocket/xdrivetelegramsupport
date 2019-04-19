@@ -12,15 +12,8 @@ class Tl
     }
 
     public function sendMessage($chat_id, $text) {
-        //send
-//        $response = $this->query('sendMessage',
-//            [
-//                'text' => $text,
-//                'chat_id' => $chat_id,
-//                'parse_mode' => 'html'
-//            ]
-//        );
-//        return $response;
+        $response = fopen($this->url . "/sendMessage?chat_id=' . $chat_id . '&parse_mode=html&text=".$text,"r");
+        return $response;
     }
 
 }
