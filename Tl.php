@@ -18,7 +18,7 @@ class Tl
             }
         }
         $result =  file_get_contents($url);
-        return json_encode($result);
+        return json_encode($result); //json-request
     }
 
     public function getUpdates() {
