@@ -4,7 +4,7 @@
 class Tl
 {
 
-    private $token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
+    private $token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U'; //url telegram
 
     public function query($method, $params = []) {
         $url        = 'https://api.telegram.org/bot';
