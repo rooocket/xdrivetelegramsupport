@@ -6,4 +6,5 @@ include("Tl.php");
 $telegramAPI = new Tl();
 $updates = $telegramAPI->getUpdates();
 
+echo date('H.i:s', time());
 print_r($updates);
