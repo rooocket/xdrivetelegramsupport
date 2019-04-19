@@ -14,5 +14,5 @@ echo '</pre>';
 
 //Проходим по сообщения
 foreach($updates as $update) {
-    $telegramAPI->sendMessage($update->message->chat->id, 'Hello');
+    $telegramAPI->sendMessage($update->message->chat->username, 'Hello');
 }

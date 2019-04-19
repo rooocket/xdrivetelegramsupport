@@ -29,7 +29,7 @@ class Tl
     public function sendMessage($chat_id, $text) {
         $this->query('sendMessage',[
            'text' => $text,
-            'chat_id' => $chat_id
+            'chat_id' => '@' . $chat_id
         ]);
 
     }
