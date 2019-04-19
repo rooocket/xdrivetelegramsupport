@@ -15,8 +15,9 @@ $telegramAPI = new Tl();
 //Получаем сообщения
 $updates = $telegramAPI->getUpdates();
 
+echo '<pre>';
 var_dump($updates);
-
+echo '</pre>';
 //Проходим по сообщения
 foreach($updates as $update) {
     $telegramAPI->sendMessage($update->message->chat->id, 'This time ' . date('H.i.s', time()));
