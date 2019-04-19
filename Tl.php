@@ -9,16 +9,16 @@ class Tl
     public function query($method, $params = []) {
         $url        = 'https://api.telegram.org/bot';
         $url        .= $this->token . '/';
-        $url        .= $method . '/';
+        $url        .= $method ;
         if(!empty($params)) {
             $k = 0;
             foreach($params as $key=>$value) {
-                $url .= ($k == 0 ? '?' : '&') . $key . '=' . $value;
+                $url .= ($k == 0 ? '/?' : '&') . $key . '=' . $value;
                 $k++;
             }
         }
         $result =  file_get_contents($url);
-        return json_encode($result); //json-request
+        return '=====================================' . json_encode($result); //json-request
     }
 
     public function getUpdates() {
