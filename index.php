@@ -21,7 +21,7 @@ var_dump($updates);
 echo '</pre>';
 //Проходим по сообщения
 foreach($updates as $update) {
-    $text = 'Ты мне написал: ' . $update->message->chat->text;
+    $text = 'Ты мне написал: ' . $update->message->text;
     $telegramAPI->sendMessage($update->message->chat->id, $text);
 }
 
