@@ -46,7 +46,7 @@ if(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_i
         "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
     );
 
-    $message_t = "Привет, " . $first_name . ".\n\nНажмите на кнопку Создать жалобу под клавиатурой.";
+    $message_t = "Привет, " . $first_name . ".\n\nНажмите на кнопку Создать жалобу под клавиатурой." . $message;
     $param = '&reply_markup=' . json_encode($keyboard);
 } else {
 
