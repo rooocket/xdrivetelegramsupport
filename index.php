@@ -32,7 +32,7 @@ function sendMessage($chat_id, $message, $first_name)
         }
     */
 
-    $message = $first_name . ', требуется регистрация в боте';
+    $message = $first_name . ', ты ввел семволов: ' . mb_strlen($message, 'utf-8');
     $keyboard = array(
         "keyboard" => array(array(array(
             "text" => "/button"
