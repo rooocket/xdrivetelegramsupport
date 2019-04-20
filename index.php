@@ -42,8 +42,8 @@ if(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_i
                 )
             )
         ),
-        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+        "one_time_keyboard" => false, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+        "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
     );
 
     $message_t = "Привет, " . $first_name . ".\n\nНажмите на кнопку Создать жалобу под клавиатурой.";
