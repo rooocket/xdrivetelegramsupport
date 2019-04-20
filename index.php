@@ -4,6 +4,9 @@ error_reporting(E_ALL);
 include("Tl.php");
 $t = new Tl();
 $upd = $t->getUpdates();
+echo '<pre>';
+var_dump($upd);
+echo '</pre>';
 //
 //function sendMessage($chat_id, $message, $first_name)
 //{
