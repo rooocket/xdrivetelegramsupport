@@ -5,6 +5,37 @@ include("Tl.php");
 
 function sendMessage($chat_id, $message, $first_name)
 {
+    $keyboard = '';
+    //Проверяем, была ли регистрация?
+    if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt')) {
+
+    } else {
+        //Просим прислать номер телефона
+        $mes = preg_replace('![^0-9]+!', '', $message);
+        if($mes > 10) {
+            $message = 'Вы ввели номер телефона: ' . $message;
+        } elseif($mes === 4){
+            $message = 'Вы код поттверждения: ' . $message;
+        } else {
+            $message = $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение';
+            $keyboard = array(
+                "keyboard" => array(array(
+                    array(
+                        "text" => "Отправить номер телефона",
+                        "request_contact" => true
+
+                    )
+                )),
+                "one_time_keyboard" => true,
+                "resize_keyboard" => true
+            );
+
+        }
+
+        file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . (!empty($keyboard) ? '&reply_markup=' . json_encode($keyboard) : ''));
+    }
+
+
     /*
         if($message == 'hi' || $message == 'привет') {
             $message = $first_name . ', я приветствую тебя. Для перехода в меню введи /start или /menu';
@@ -31,22 +62,7 @@ function sendMessage($chat_id, $message, $first_name)
             $message = $first_name . ', Ты написал: ' . $message;
         }
     */
-    $keyboard = '';
-    $message = $first_name . ', ты ввел семволов: ' . strlen($message);
-    $keyboard = array(
-        "keyboard" => array(array(
-            array(
-                "text" => "Отправить номер телефона",
-                "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
 
-            )
-        )),
-        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
-    );
-
-
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . (!empty($keyboard) ? '&reply_markup=' . json_encode($keyboard) : ''));
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
