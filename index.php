@@ -32,7 +32,7 @@ function sendMessage($chat_id, $message, $first_name)
         }
     */
     $keyboard = '';
-    $message = $first_name . ', ты ввел семволов: ' . mb_strlen($message, 'utf-8');
+    $message = $first_name . ', ты ввел семволов: ' . $message;
     $keyboard = array(
         "keyboard" => array(array(array(
             "text" => "/button"
