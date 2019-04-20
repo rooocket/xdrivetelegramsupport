@@ -31,28 +31,33 @@ function sendMessage($chat_id, $message, $first_name)
         $message = $first_name . ', Ты написал: ' . $message;
     }
 */
+    $message = preg_replace('![^0-9]+!', '', $message);
 
-    $message = $first_name . ', требуется регистрация в боте';
-    $keyboard = array(
-        "keyboard" => array(array(array(
-            "text" => "/button"
+    if(mb_strlen($message) > 10) {
+        //Отправляем смс
+        $message = 'Вам на телефон +' . $message . ' отправлено смс с кодом подтверждения';
+    } elseif(mb_strlen($message) == 4) {
+        //вводим код
+        $message = 'Введите код из смс';
 
-        ),
-            array(
-                "text" => "contact",
-                "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
+        //если вводим верный пароль. то записываем chat_id и номер телефона
+    } else {
+        $message = 'Требуется регистрация';
+        //выводим сообщение о регистрации
+        $keyboard = array(
+            "keyboard" => array(
+                array(
+                    array(
+                        "text" => "Отправить номер телефона",
+                        "request_contact" => true
 
-            ),
-            array(
-                "text" => "location",
-                "request_location" => true // Данный запрос необязательный telegram button для запроса локации пользователя
+                    )
+                )),
+            "one_time_keyboard" => true,
+            "resize_keyboard" => true
+        );
+    }
 
-            )
-
-        )),
-        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
-    );
 
 
     file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&reply_markup=' . json_encode($keyboard));
