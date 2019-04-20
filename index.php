@@ -34,21 +34,12 @@ function sendMessage($chat_id, $message, $first_name)
     $keyboard = '';
     $message = $first_name . ', ты ввел семволов: ' . strlen($message);
     $keyboard = array(
-        "keyboard" => array(array(array(
-            "text" => "/button"
-
-        ),
+        "keyboard" => array(array(
             array(
-                "text" => "contact",
+                "text" => "Отправить номер телефона",
                 "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
 
-            ),
-            array(
-                "text" => "location",
-                "request_location" => true // Данный запрос необязательный telegram button для запроса локации пользователя
-
             )
-
         )),
         "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
         "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
