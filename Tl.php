@@ -10,7 +10,7 @@ class Tl
     public function getUpdates() {
 
 
-        $response = file_get_contents($this->url . '/getUpdates');
+        $response = json_decode(file_get_contents($this->url . '/getUpdates'));
 
 //        if(!empty($response->result)) {
 //            $this->updateId = $response->result[count($response->result) - 1]->update_id;
