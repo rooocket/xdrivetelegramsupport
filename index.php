@@ -5,7 +5,7 @@ include("Tl.php");
 
 function sendMessage($chat_id, $message, $first_name)
 {
-
+/*
     if($message == 'hi' || $message == 'привет') {
         $message = $first_name . ', я приветствую тебя. Для перехода в меню введи /start или /menu';
     }
@@ -30,9 +30,32 @@ function sendMessage($chat_id, $message, $first_name)
     else {
         $message = $first_name . ', Ты написал: ' . $message;
     }
+*/
+
+    $message = $first_name . ', требуется регистрация в боте';
+    $keyboard = array(
+        "keyboard" => array(array(array(
+            "text" => "/button"
+
+        ),
+            array(
+                "text" => "contact",
+                "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
+
+            ),
+            array(
+                "text" => "location",
+                "request_location" => true // Данный запрос необязательный telegram button для запроса локации пользователя
+
+            )
+
+        )),
+        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+    );
 
 
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message));
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&reply_markup=' . json_encode($keyboard));
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
