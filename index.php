@@ -26,7 +26,7 @@ $param          = '';
 
 //Регистрация состоялась и в файле записан номер телефона
 if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt')) {
-
+    $message_t = $first_name . 'Поздравляю, у вас активированный аккаунт';
 } else {
 
     $number = preg_replace('![^0-9]+!', '', $message);
