@@ -57,6 +57,7 @@ if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.
                 'action'    => 'loginCreate',
                 'chat_id'   => $chat_id
             );
+            $q = $query->xDriveQuery($array);
         } else {
             $message_t = 'Вы ввели неверный пароль для подтверждения.';
         }
