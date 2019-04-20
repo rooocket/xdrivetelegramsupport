@@ -1,9 +1,13 @@
 <?php
+include('query.php');
+$query = new Query();
 
 function sendMessage($chat_id, $message, $param)
 {
     file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
 }
+
+
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 $api = 'https://api.telegram.org/bot' . $access_token;
@@ -17,33 +21,45 @@ $message        = $output['message']['text'];
 $message_t      = '';
 $param          = '';
 
-$number = preg_replace('![^0-9]+!', '', $message);
-if(!empty($contact)) {
-    $message_t = 'На Ваш номер телефона +' . $contact . ' отправлено SMS-сообщение с кодом доступа. Такой же номер телефона у вас должен быть указан в проекте xDrive/';
-}
+/*
+ * Проверяем была регистрация или нет
+ */
 
-elseif(strlen($number) == 4) {
-    $message_t = 'Началась проверка введенного кода доступа';
-}
+//Регистрация состоялась и в файле записан номер телефона
+if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt')) {
 
-else {
+} else {
 
-    $keyboard = array(
-        "keyboard" => array(
-            array(
+    $number = preg_replace('![^0-9]+!', '', $message);
+    if(!empty($contact)) {
+        $message_t = 'На Ваш номер телефона +' . $contact . ' отправлено SMS-сообщение с кодом доступа. Такой же номер телефона у вас должен быть указан в проекте xDrive';
+    }
+
+    elseif(strlen($number) == 4) {
+        $message_t = 'Началась проверка введенного кода доступа';
+    }
+
+    else {
+
+        $keyboard = array(
+            "keyboard" => array(
                 array(
-                    "text" => "contact",
-                    "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
+                    array(
+                        "text" => "contact",
+                        "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
 
+                    )
                 )
-            )
-        ),
-        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
-    );
+            ),
+            "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+            "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+        );
 
-    $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive. Нажмите на кнопку отправить номер телефона под клавиатурой.';
-    $param = '&reply_markup=' . json_encode($keyboard);
+        $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive. Нажмите на кнопку отправить номер телефона под клавиатурой.';
+        $param = '&reply_markup=' . json_encode($keyboard);
+    }
+
+
 }
 
 sendMessage($chat_id, $message_t, $param);
