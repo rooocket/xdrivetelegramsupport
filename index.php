@@ -2,7 +2,20 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 include("Tl.php");
+$keyboard = array(
+    "keyboard" => array(array(
+        array(
+            "text" => "Отправить номер телефона",
+            "request_contact" => true
 
+        )
+    )),
+    "one_time_keyboard" => true,
+    "resize_keyboard" => true
+);
+
+$keyboard = '&reply_markup=' . json_encode($keyboard);
+echo $keyboard;
 function sendMessage($chat_id, $message, $first_name)
 {
     $message = 'Здравствуй, ' . $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение' . $message;
@@ -95,7 +108,7 @@ $first_name = $output['message']['chat']['first_name'];
 $message = $output['message']['text'];
 $reply_markup = $output['message']['reply_markup']->keyboard;
 
-var_dump($output);
+
 
 //$preload_text = $first_name . ', я получила ваше сообщение!' . $message;
 sendMessage($chat_id, $message, $first_name);
