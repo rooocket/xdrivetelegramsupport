@@ -33,6 +33,8 @@ function sendMessage($chat_id, $message, $first_name)
 */
     $message = preg_replace('![^0-9]+!', '', $message);
     $keyboard = '';
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . ($keyboard ? '&reply_markup=' . json_encode($keyboard) : ''));
+    /*
     if(mb_strlen($message) > 10) {
         //Отправляем смс
         $message = 'Вам на телефон +' . $message . ' отправлено смс с кодом подтверждения';
@@ -57,10 +59,10 @@ function sendMessage($chat_id, $message, $first_name)
             "resize_keyboard" => true
         );
     }
+*/
 
 
 
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . ($keyboard ? '&reply_markup=' . json_encode($keyboard) : ''));
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
