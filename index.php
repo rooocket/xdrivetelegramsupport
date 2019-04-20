@@ -1,8 +1,8 @@
 <?php
 
-function sendMessage($chat_id, $message)
+function sendMessage($chat_id, $message, $param)
 {
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message));
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
@@ -15,6 +15,7 @@ $contact        = isset($output['message']['contact']['phone_number']) ? $output
 $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
+$param          = '';
 
 $number = preg_replace('![^0-9]+!', '', $message);
 if(!empty($contact)) {
@@ -41,7 +42,8 @@ else {
         "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
     );
 
-    $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive. Нажмите на кнопку отправить номер телефона под клавиатурой.&reply_markup=' . json_encode($keyboard);
+    $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive. Нажмите на кнопку отправить номер телефона под клавиатурой.';
+    $param = '&reply_markup=' . json_encode($keyboard);
 }
 
-sendMessage($chat_id, $message_t);
+sendMessage($chat_id, $message_t, $param);
