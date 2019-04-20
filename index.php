@@ -5,6 +5,22 @@ include("Tl.php");
 
 function sendMessage($chat_id, $message, $first_name)
 {
+    $message = 'Здравствуй, ' . $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение' . $message;
+    $keyboard = array(
+        "keyboard" => array(array(
+            array(
+                "text" => "Отправить номер телефона",
+                "request_contact" => true
+
+            )
+        )),
+        "one_time_keyboard" => true,
+        "resize_keyboard" => true
+    );
+
+    $keyboard = '&reply_markup=' . json_encode($keyboard);
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $keyboard);
+
     $keyboard = '';
     //Проверяем, была ли регистрация?
     if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt')) {
@@ -77,6 +93,9 @@ $output = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id = $output['message']['chat']['id'];
 $first_name = $output['message']['chat']['first_name'];
 $message = $output['message']['text'];
+$reply_markup = $output['message']['reply_markup']->keyboard;
+
+var_dump($output);
 
 //$preload_text = $first_name . ', я получила ваше сообщение!' . $message;
 sendMessage($chat_id, $message, $first_name);
