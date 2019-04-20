@@ -49,7 +49,17 @@ if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.
     }
     /******************************************************************************/
     elseif(strlen($number) == 4) {
-        $message_t = 'Началась проверка введенного кода доступа';
+        $code = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/sms_' . $chat_id . '.txt');
+
+        if($code == $message) {
+            $message_t = 'Ваш аккаунт активирован';
+            $array = array(
+                'action'    => 'loginCreate',
+                'chat_id'   => $chat_id
+            );
+        } else {
+            $message_t = 'Вы ввели неверный пароль для подтверждения.';
+        }
     }
     /******************************************************************************/
     else {
