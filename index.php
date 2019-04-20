@@ -32,9 +32,11 @@ function sendMessage($chat_id, $message, $first_name)
                 "resize_keyboard" => true
             );
 
+            $keyboard = '&reply_markup=' . json_encode($keyboard);
+
         }
 
-        file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . (!empty($keyboard) ? '&reply_markup=' . json_encode($keyboard) : ''));
+        file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $keyboard);
     }
 
 
