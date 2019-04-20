@@ -42,7 +42,7 @@ function sendMessage($chat_id, $message, $first_name)
 
         //если вводим верный пароль. то записываем chat_id и номер телефона
     } else {
-        $message = 'Требуется регистрация';
+        $message = $first_name. ', Требуется регистрация';
         //выводим сообщение о регистрации
         $keyboard = array(
             "keyboard" => array(
@@ -50,9 +50,9 @@ function sendMessage($chat_id, $message, $first_name)
                     array(
                         "text" => "Отправить номер телефона",
                         "request_contact" => true
-
+                        )
                     )
-                )),
+            ),
             "one_time_keyboard" => true,
             "resize_keyboard" => true
         );
