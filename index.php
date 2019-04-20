@@ -2,6 +2,11 @@
 include('query.php');
 $query = new Query();
 
+//158010101 - Саша Иванов
+//293854654 - Саша Жаров
+$admin_array = array(293854654);
+
+
 function sendMessage($chat_id, $message, $param)
 {
     file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
@@ -26,7 +31,23 @@ $param          = '';
 
 //Регистрация состоялась и в файле записан номер телефона
 if(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt')) {
-    $message_t = $first_name . 'Поздравляю, у вас активированный аккаунт';
+    $keyboard = array(
+        "keyboard" => array(
+            array(
+                array(
+                    "text" => "Создать жалобу"
+                ),
+                array(
+                    "text" => "Получить информацию по заявке"
+                )
+            )
+        ),
+        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+    );
+
+    $message_t = "Привет, " . $first_name . ".\n\nНажмите на кнопку Создать жалобу под клавиатурой.";
+    $param = '&reply_markup=' . json_encode($keyboard);
 } else {
 
     $number = preg_replace('![^0-9]+!', '', $message);
