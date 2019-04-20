@@ -8,7 +8,6 @@ function sendMessage($chat_id, $message, $param)
 }
 
 
-
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 $api = 'https://api.telegram.org/bot' . $access_token;
 
@@ -31,14 +30,28 @@ if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.
 } else {
 
     $number = preg_replace('![^0-9]+!', '', $message);
+    /******************************************************************************/
     if(!empty($contact)) {
-        $message_t = 'На Ваш номер телефона +' . $contact . ' отправлено SMS-сообщение с кодом доступа. Такой же номер телефона у вас должен быть указан в проекте xDrive';
-    }
 
+        $array = array(
+            'action'    => 'sms',
+            'chat_id'   => $chat_id,
+            'phone'     => $contact
+        );
+        $q = $query->xDriveQuery($array);
+
+        if($q == 0) {
+            $message_t = 'Я не могу предоставить Вам доступ. Напишите администратору @br0dobro и мы вам поможем!';
+        } else {
+            $message_t = 'На Ваш номер телефона +' . $contact . ' отправлено SMS-сообщение с кодом доступа. Такой же номер телефона у вас должен быть указан в проекте xDrive';
+        }
+
+    }
+    /******************************************************************************/
     elseif(strlen($number) == 4) {
         $message_t = 'Началась проверка введенного кода доступа';
     }
-
+    /******************************************************************************/
     else {
 
         $keyboard = array(
