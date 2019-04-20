@@ -11,12 +11,12 @@ class Tl
 
 
         $response = file_get_contents($this->url . '/getUpdates');
+//
+//        if(!empty($response->result)) {
+//            $this->updateId = $response->result[count($response->result) - 1]->update_id;
+//        }
 
-        if(!empty($response->result)) {
-            $this->updateId = $response->result[count($response->result) - 1]->update_id;
-        }
-
-        return $response->result;
+        return $response;
     }
 
     public function sendMessage($chat_id, $text) {
