@@ -10,15 +10,13 @@ class Tl
     public function getUpdates() {
 
 
-        $response = fopen('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates', 'r');
-//
+        $response = file_get_contents($this->url . '/getUpdates');
+
 //        if(!empty($response->result)) {
 //            $this->updateId = $response->result[count($response->result) - 1]->update_id;
 //        }
 
-        return $response;
-
-
+        return $response->result;
     }
 
     public function sendMessage($chat_id, $text) {
