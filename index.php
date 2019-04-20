@@ -26,7 +26,22 @@ elseif(strlen($number) == 4) {
 }
 
 else {
-    $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive.';
+
+    $keyboard = array(
+        "keyboard" => array(
+            array(
+                array(
+                    "text" => "contact",
+                    "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
+
+                )
+            )
+        ),
+        "one_time_keyboard" => true, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+        "resize_keyboard" => true // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+    );
+
+    $message_t = 'Привет, ' . $first_name . '. Меня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive. Нажмите на кнопку отправить номер телефона под клавиатурой.&reply_markup=' . json_encode($keyboard);
 }
 
 sendMessage($chat_id, $message_t);
