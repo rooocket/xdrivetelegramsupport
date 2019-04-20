@@ -68,7 +68,7 @@ if(file_exists('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.
             "keyboard" => array(
                 array(
                     array(
-                        "text" => "contact",
+                        "text" => "Отправить номер телефона",
                         "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
 
                     )
