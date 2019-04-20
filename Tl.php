@@ -10,7 +10,7 @@ class Tl
     public function getUpdates() {
 
 
-        $response = file_get_contents($this->url . '/getUpdates');
+        $response = file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates');
 //
 //        if(!empty($response->result)) {
 //            $this->updateId = $response->result[count($response->result) - 1]->update_id;
