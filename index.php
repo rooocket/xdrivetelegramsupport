@@ -1,12 +1,14 @@
 <?php
 ini_set('display_errors',1);
 error_reporting(E_ALL);
-include("Tl.php");
-$t = new Tl();
-$upd = $t->getUpdates();
-echo '<pre>';
-var_dump($upd);
-echo '</pre>';
+//include("Tl.php");
+//$t = new Tl();
+//$upd = $t->getUpdates();
+//echo '<pre>';
+//var_dump($upd);
+//echo '</pre>';
+$response = fopen('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/deleteWebhook', 'r');
+
 //
 //function sendMessage($chat_id, $message, $first_name)
 //{
