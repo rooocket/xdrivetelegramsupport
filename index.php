@@ -8,7 +8,26 @@ function sendMessage($chat_id, $message, $first_name)
 
     if($message == 'hi' || $message == 'привет') {
         $message = $first_name . ', я приветствую тебя. Для перехода в меню введи /start или /menu';
-    } else {
+    }
+    elseif($message == '999-999'){
+         $url = 'https://xdrive.faberlic.com/api/api_telegram.php';
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'content' => http_build_query([
+
+                    'key' 			=> '54670a1ad18ce5842eea01499c12ed5a',	//ключ
+                    'action' 		=> 'CheckRegistration',	                //метод
+                    'login' 		=> $message,							//телефон
+                    'chat_id' 		=> $chat_id,							//телефон
+                ])
+            ]
+        ]);
+
+        file_get_contents($url, false, $context);
+    }
+
+    else {
         $message = $first_name . ', Ты написал: ' . $message;
     }
 
