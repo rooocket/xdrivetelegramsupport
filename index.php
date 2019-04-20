@@ -55,7 +55,7 @@ function sendMessage($chat_id, $message, $first_name)
     );
 
 
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message));
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . (!empty($keyboard) ? '&reply_markup=' . json_encode($keyboard) : ''));
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
