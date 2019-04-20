@@ -15,9 +15,9 @@ function sendMessage($chat_id, $message, $first_name)
         $mes = preg_replace('![^0-9]+!', '', $message);
         $mes = strlen($mes);
         if($mes > 10) {
-            $message = 'Вы ввели номер телефона: ' . $message . ' (' . strlen($mes) . ')';
+            $message = 'Вы ввели номер телефона: ' . $message . ' (' . $mes . ')';
         } elseif($mes == 4){
-            $message = 'Вы код подтверждения: ' . $message . ' (' . strlen($mes) . ')';
+            $message = 'Вы код подтверждения: ' . $message . ' (' . $mes . ')';
         } else {
             $message = $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение';
             $keyboard = array(
