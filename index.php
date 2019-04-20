@@ -31,7 +31,7 @@ function sendMessage($chat_id, $message, $first_name)
             $message = $first_name . ', Ты написал: ' . $message;
         }
     */
-
+    $keyboard = '';
     $message = $first_name . ', ты ввел семволов: ' . mb_strlen($message, 'utf-8');
     $keyboard = array(
         "keyboard" => array(array(array(
@@ -55,7 +55,7 @@ function sendMessage($chat_id, $message, $first_name)
     );
 
 
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . '&reply_markup');
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . ($keyboard ? '&reply_markup=json_encode(' . $keyboard . ')' : ''));
 }
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
