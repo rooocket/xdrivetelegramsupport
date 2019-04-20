@@ -19,7 +19,7 @@ function sendMessage($chat_id, $message, $first_name)
         } elseif($mes == 4){
             $message = 'Вы код подтверждения: ' . $message . ' (' . $mes . ')';
         } else {
-            $message = $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение';
+            $message = $first_name . ', требуется регистрация, нажмите на кнопку Отправить сообщение' . $message;
             $keyboard = array(
                 "keyboard" => array(array(
                     array(
