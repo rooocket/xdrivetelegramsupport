@@ -65,15 +65,15 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     elseif($message == 'Создать жалобу') {
         $message = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
         $array = array(
-            'action'    => 'request',
-            'type'      => 'create_complaint',
-            'chat_id'   => $chat_id
+            'action' => 'request',
+            'type' => 'create_complaint',
+            'chat_id' => $chat_id
         );
         $q = $query->xDriveQuery($array);
     }
     /******************************************************************************/
     elseif ($message == 'Статус заявки') {
-
+        $message = 'Запрос по заявке';
     }
     /******************************************************************************/
     else {
