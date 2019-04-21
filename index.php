@@ -65,7 +65,8 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             $id = preg_replace('![^0-9]+!', '', $message);
             $array = array(
                 'action'    => 'find',
-                'id'        => $id
+                'id'        => $id,
+                'chat_id'   => $chat_id
             );
             $q = $query->xDriveQuery($array);
 
