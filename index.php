@@ -45,7 +45,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
                 $array = array(
                     'action'    => 'add',
                     'number'    => $m_arr[1][0],
-                    'text'      => $m_arr[2][0],
+                    'text'      => trim($m_arr[2][0]),
                     'chat_id'   => $chat_id
                 );
                 $q = $query->xDriveQuery($array);
