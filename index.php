@@ -13,14 +13,14 @@ $admin_array = array(293854654);
 
 $updatest = file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates');
 $output = json_decode($updatest);
-$output = json_decode($output->result[0]);
+$output = $output->result[0];
 echo '<pre>';
 var_dump($output);
 echo '</pre>';
 
-$chat_id        = $output['message']['chat']['id'];
-$contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
-$first_name     = $output['message']['chat']['first_name'];
-$message        = $output['message']['text'];
+$chat_id        = $output['message']->chat->id;
+$contact        = isset($output['message']->contact->phone_number) ?$output['message']->contact->phone_number : '';
+$first_name     = $output['message']->chat->first_name;
+$message        = $output['message']->text;
 $message_t      = '';
 $param          = '';
