@@ -2,6 +2,8 @@
 include('query.php');
 $query = new Query();
 
+//https://xdrivetelegramsupport.herokuapp.com/index.php
+
 //158010101 - Саша Иванов
 //293854654 - Саша Жаров
 $admin_array = array(293854654);
