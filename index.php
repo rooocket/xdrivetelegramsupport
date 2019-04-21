@@ -18,9 +18,9 @@ echo '<pre>';
 var_dump($output);
 echo '</pre>';
 
-$chat_id        = $output['message']->chat->id;
-$contact        = isset($output['message']->contact->phone_number) ?$output['message']->contact->phone_number : '';
-$first_name     = $output['message']->chat->first_name;
-$message        = $output['message']->text;
+$chat_id        = $output->message->chat->id;
+$contact        = isset($output->message->contact->phone_number) ?$output->message->contact->phone_number : '';
+$first_name     = $output->message->chat->first_name;
+$message        = $output->message->text;
 $message_t      = '';
 $param          = '';
