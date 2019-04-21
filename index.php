@@ -58,22 +58,22 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
 
 
             } else {
-                $number = preg_replace('![^0-9]+!', '', $message);
-                $array = array(
-                    'action'    => 'find',
-                    'id'        => $number
-                );
-                $q = $query->xDriveQuery($array);
-
-                if($q == 0) {
-                    $message_t = 'Заявка не найдена.' . $error_text;
-                } else {
-                    $message_t = $q;
-                }
+                $message_t = "Не правильно введен запрос.\n\nПример, 71******* слишком молодая девушка";
             }
         }
         elseif($type == 'application_status') {
-            $message_t = 'sdsds';
+            $number = preg_replace('![^0-9]+!', '', $message);
+            $array = array(
+                'action'    => 'find',
+                'id'        => $number
+            );
+            $q = $query->xDriveQuery($array);
+
+            if($q == 0) {
+                $message_t = 'Заявка не найдена.' . $error_text;
+            } else {
+                $message_t = $q;
+            }
         }
         else {
             $message_t = 'Ошибка выполнения запроса. ' . $error_text;
@@ -91,7 +91,13 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     }
     /******************************************************************************/
     elseif ($message == 'Статус заявки') {
-        $message_t = 'Запрос по заявке';
+        $message_t = $first_name . ", введите числовой номер заявки";
+        $array = array(
+            'action' => 'request',
+            'type' => 'application_status',
+            'chat_id' => $chat_id
+        );
+        $q = $query->xDriveQuery($array);
     }
     /******************************************************************************/
     else {
