@@ -62,10 +62,10 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             }
         }
         elseif($type == 'application_status') {
-            $number = preg_replace('![^0-9]+!', '', $message);
+            $id = preg_replace('![^0-9]+!', '', $message);
             $array = array(
                 'action'    => 'find',
-                'id'        => $number
+                'id'        => $id
             );
             $q = $query->xDriveQuery($array);
 
