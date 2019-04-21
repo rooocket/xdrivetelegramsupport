@@ -28,6 +28,7 @@ $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
 $param          = '';
+$error_text     = "\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
  * Проверяем была регистрация или нет
@@ -49,7 +50,13 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
                 );
                 $q = $query->xDriveQuery($array);
 
-                $message_t = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                if($q == 0) {
+                    $message_t = 'Ошибка добавления заявки.' . $error_text;
+                } else {
+                    $message_t = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                }
+
+
             } else {
                 $message_t = 'Не правильно введен запрос. Пример, 71******* слишком молодая девушка';
             }
@@ -58,7 +65,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             $message_t = 'sdsds';
         }
         else {
-            $message_t = 'Ошибка выполнения запроса. Напишите администратору @br0dobro и мы вам поможем!';
+            $message_t = 'Ошибка выполнения запроса. ' . $error_text;
         }
     }
     /******************************************************************************/
@@ -111,7 +118,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         $q = $query->xDriveQuery($array);
 
         if($q == 0) {
-            $message_t = 'Я не могу предоставить Вам доступ. Напишите администратору @br0dobro и мы вам поможем!';
+            $message_t = 'Я не могу предоставить Вам доступ.' .$error_text;
         } else {
             $message_t = 'На Ваш номер телефона ' . $contact . ' отправлено SMS-сообщение с кодом доступа.';
         }
