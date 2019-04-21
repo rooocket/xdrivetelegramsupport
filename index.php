@@ -41,11 +41,11 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         $type = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt');
         if($type == 'create_complaint') {
             preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
-            if(!empty($m_arr[1]) && !empty($m_arr[2])) {
+            if(!empty($m_arr[1][0]) && !empty($m_arr[2][0])) {
                 $array = array(
                     'action'    => 'add',
-                    'number'    => $m_arr[1],
-                    'text'      => $m_arr[2],
+                    'number'    => $m_arr[1][0],
+                    'text'      => $m_arr[2][0],
                     'chat_id'   => $chat_id
                 );
                 $q = $query->xDriveQuery($array);
