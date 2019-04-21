@@ -1,38 +1,33 @@
 <?php
-ini_set('display_errors',1);
-error_reporting(E_ALL);
-
 include('query.php');
 $query = new Query();
-
-
 
 //158010101 - Саша Иванов
 //293854654 - Саша Жаров
 $admin_array = array(293854654);
 
+//Меня запросов
+//create_complaint - Создать жалобу
+//application_status - Статус заявки
+
 
 function sendMessage($chat_id, $message, $param)
 {
-    //file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
-    file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
+    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
 }
 
-$updatest = json_decode(file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates'), TRUE);
-$output = $updatest['result'][count($updatest['result']) - 1];
-echo '<pre>';
-var_dump($output);
-echo '</pre>';
 
-//$output         = json_decode(file_get_contents('php://input'), TRUE);
+$access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
+$api = 'https://api.telegram.org/bot' . $access_token;
+
+
+$output         = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id        = $output['message']['chat']['id'];
 $contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
 $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
 $param          = '';
-
-
 
 /*
  * Проверяем была регистрация или нет
@@ -54,21 +49,21 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
                 );
                 $q = $query->xDriveQuery($array);
 
-                $message = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                $message_t = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
             } else {
-                $message = 'Не правильно введен запрос. Пример, 71******* слишком молодая девушка';
+                $message_t = 'Не правильно введен запрос. Пример, 71******* слишком молодая девушка';
             }
         }
         elseif($type == 'application_status') {
-            $message = 'sdsds';
+            $message_t = 'sdsds';
         }
         else {
-            $message = 'Ошибка выполнения запроса. Напишите администратору @br0dobro и мы вам поможем!';
+            $message_t = 'Ошибка выполнения запроса. Напишите администратору @br0dobro и мы вам поможем!';
         }
     }
     /******************************************************************************/
     elseif($message == 'Создать жалобу') {
-        $message = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
+        $message_t = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
         $array = array(
             'action' => 'request',
             'type' => 'create_complaint',
@@ -78,7 +73,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     }
     /******************************************************************************/
     elseif ($message == 'Статус заявки') {
-        $message = 'Запрос по заявке';
+        $message_t = 'Запрос по заявке';
     }
     /******************************************************************************/
     else {
