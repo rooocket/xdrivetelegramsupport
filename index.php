@@ -95,6 +95,8 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             } else {
                 $message_t = $q;
             }
+
+            $message_t = $q;
         }
         else {
             $message_t = 'Ошибка выполнения запроса. ' . $error_text;
