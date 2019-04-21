@@ -55,7 +55,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             }
         }
         elseif($type == 'application_status') {
-
+            $message = 'sdsds';
         }
         else {
             $message = 'Ошибка выполнения запроса. Напишите администратору @br0dobro и мы вам поможем!';
