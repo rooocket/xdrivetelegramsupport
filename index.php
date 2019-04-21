@@ -53,7 +53,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
                 if($q == 0) {
                     $message_t = 'Ошибка добавления заявки.' . $error_text;
                 } else {
-                    $message_t = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                    $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
                 }
 
 
