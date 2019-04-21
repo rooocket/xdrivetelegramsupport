@@ -48,7 +48,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     }
     /******************************************************************************/
     elseif ($message == 'Статус заявки') {
-        $message_t = $first_name . ", введите числовой номер заявки";
+        $message_t = $first_name . ", введите числовой номер заявки или регистрационный номер консультанта";
         $array = array(
             'action' => 'request',
             'type' => 'application_status',
