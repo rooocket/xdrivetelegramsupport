@@ -62,19 +62,28 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         if($type == 'create_complaint') {
             preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
             if(!empty($m_arr[1][0]) && !empty($m_arr[2][0])) {
-                $array = array(
-                    'action'    => 'add',
-                    'number'    => $m_arr[1][0],
-                    'text'      => trim($m_arr[2][0]),
-                    'chat_id'   => $chat_id
-                );
-                $q = $query->xDriveQuery($array);
 
-                if($q == 0) {
-                    $message_t = 'Ошибка добавления заявки.' . $error_text;
+                if(strlen($m_arr[1][0]) == 9) {
+                    $array = array(
+                        'action'    => 'add',
+                        'number'    => $m_arr[1][0],
+                        'text'      => trim($m_arr[2][0]),
+                        'chat_id'   => $chat_id
+                    );
+                    $q = $query->xDriveQuery($array);
+
+
+                    if($q == 0) {
+                        $message_t = 'Ошибка добавления заявки.' . $error_text;
+                    } else {
+                        $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                    }
                 } else {
-                    $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                    $message_t = 'Ошибка! Неправильно введен регистрационный номер консультанта..';
                 }
+
+
+
 
 
             } else {
