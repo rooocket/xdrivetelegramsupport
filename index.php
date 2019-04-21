@@ -35,34 +35,7 @@ $param          = '';
 
 //Регистрация состоялась и в файле записан номер телефона
 if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt'))) {
-    /******************************************************************************/
-    if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt'))) {
-        $type = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt');
-        if($type == 'create_complaint') {
-            preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
-            if(!empty($num_arr[1]) && !empty($num_arr[2])) {
-                $array = array(
-                    'action'    => 'add',
-                    'number'    => $num_arr[1],
-                    'text'      => $num_arr[2],
-                    'chat_id'   => $chat_id
-                );
-                $q = $query->xDriveQuery($array);
-
-                $message = 'Вашей заявке присвоен номер ' . $q . '. Мы отправим вам ответ в ближайшее время.';
-            } else {
-                $message = 'Не правильно введен запрос. Пример, 71******* слишком молодая девушка';
-            }
-        }
-        elseif($type == 'application_status') {
-            $message = 'sdsds';
-        }
-        else {
-            $message = 'Ошибка выполнения запроса. Напишите администратору @br0dobro и мы вам поможем!';
-        }
-    }
-    /******************************************************************************/
-    elseif($message == 'Создать жалобу') {
+    if($message == 'Создать жалобу') {
         $message = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
         $array = array(
             'action' => 'request',
