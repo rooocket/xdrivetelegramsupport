@@ -1,7 +1,8 @@
 <?php
 include('query.php');
 $query = new Query();
-
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 function sendMessage($chat_id, $message, $param)
 {
     //file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
