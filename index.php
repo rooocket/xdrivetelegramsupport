@@ -58,7 +58,18 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
 
 
             } else {
-                $message_t = "Не правильно введен запрос.\n\nПример, 71******* слишком молодая девушка";
+                $number = preg_replace('![^0-9]+!', '', $message);
+                $array = array(
+                    'action'    => 'find',
+                    'id'        => $number
+                );
+                $q = $query->xDriveQuery($array);
+
+                if($q == 0) {
+                    $message_t = 'Заявка не найдена.' . $error_text;
+                } else {
+                    $message_t = $q;
+                }
             }
         }
         elseif($type == 'application_status') {
