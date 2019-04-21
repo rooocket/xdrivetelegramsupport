@@ -11,8 +11,8 @@ $query = new Query();
 //293854654 - Саша Жаров
 $admin_array = array(293854654);
 
-$updatest = file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates');
-$output = json_decode($updatest);
+$updatest = json_decode(file_get_contents('https://api.telegram.org/bot762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U/getUpdates'), TRUE);
+$output = $updatest;
 $output = $output->result[0];
 echo '<pre>';
 var_dump($output);
