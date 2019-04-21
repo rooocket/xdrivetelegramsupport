@@ -58,7 +58,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
 
 
             } else {
-                $message_t = 'Не правильно введен запрос. Пример, 71******* слишком молодая девушка';
+                $message_t = "Не правильно введен запрос.\n\nПример, 71******* слишком молодая девушка";
             }
         }
         elseif($type == 'application_status') {
