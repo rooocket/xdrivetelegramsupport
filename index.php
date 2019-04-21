@@ -37,7 +37,27 @@ $error_text     = "\n\nНапишите администратору @br0dobro �
 //Регистрация состоялась и в файле записан номер телефона
 if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt'))) {
     /******************************************************************************/
-    if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt'))) {
+    if($message == 'Создать жалобу') {
+        $message_t = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
+        $array = array(
+            'action' => 'request',
+            'type' => 'create_complaint',
+            'chat_id' => $chat_id
+        );
+        $q = $query->xDriveQuery($array);
+    }
+    /******************************************************************************/
+    elseif ($message == 'Статус заявки') {
+        $message_t = $first_name . ", введите числовой номер заявки";
+        $array = array(
+            'action' => 'request',
+            'type' => 'application_status',
+            'chat_id' => $chat_id
+        );
+        $q = $query->xDriveQuery($array);
+    }
+    /******************************************************************************/
+    elseif(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt'))) {
         $type = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt');
         if($type == 'create_complaint') {
             preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
@@ -79,26 +99,6 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         else {
             $message_t = 'Ошибка выполнения запроса. ' . $error_text;
         }
-    }
-    /******************************************************************************/
-    elseif($message == 'Создать жалобу') {
-        $message_t = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
-        $array = array(
-            'action' => 'request',
-            'type' => 'create_complaint',
-            'chat_id' => $chat_id
-        );
-        $q = $query->xDriveQuery($array);
-    }
-    /******************************************************************************/
-    elseif ($message == 'Статус заявки') {
-        $message_t = $first_name . ", введите числовой номер заявки";
-        $array = array(
-            'action' => 'request',
-            'type' => 'application_status',
-            'chat_id' => $chat_id
-        );
-        $q = $query->xDriveQuery($array);
     }
     /******************************************************************************/
     else {
