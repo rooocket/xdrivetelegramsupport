@@ -30,7 +30,7 @@ $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
 $param          = '';
-$error_text     = "\n\nНапишите администратору @br0dobro и мы вам поможем";
+$error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
  * Проверяем была регистрация или нет
