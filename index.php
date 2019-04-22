@@ -111,6 +111,9 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         else {
             $message_t = 'Ошибка выполнения запроса. ' . $error_text;
         }
+    }    /******************************************************************************/
+    elseif($message == '/chat_id') {
+        $message_t = 'Ваш Chat_id: ' . $chat_id;
     }
     /******************************************************************************/
     else {
@@ -168,6 +171,10 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         } else {
             $message_t = 'Вы ввели неверный пароль для подтверждения.';
         }
+    }
+    /******************************************************************************/
+    elseif($message == '/chat_id') {
+        $message_t = 'Ваш Chat_id: ' . $chat_id;
     }
     /******************************************************************************/
     else {
