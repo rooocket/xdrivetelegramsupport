@@ -77,6 +77,8 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
 
                     if($q == 0) {
                         $message_t = 'Ошибка добавления заявки.' . $error_text;
+                    } elseif($q == 2) {
+                        $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1][0] . $error_text;
                     } else {
                         $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
                     }
