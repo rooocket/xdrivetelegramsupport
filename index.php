@@ -6,7 +6,7 @@ $query = new Query();
 
 //158010101 - Саша Иванов
 //293854654 - Саша Жаров
-$admin_array = array(158010101);
+$admin_array = array(158010101, 293854654);
 
 //Меня запросов
 //create_complaint - Создать жалобу
@@ -57,6 +57,16 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
             'chat_id' => $chat_id
         );
         $q = $query->xDriveQuery($array);
+    }
+    /******************************************************************************/
+    elseif ($message == 'Статистика за день') {
+        $array = array(
+            'action' => 'request',
+            'type' => 'stat',
+            'chat_id' => $chat_id
+        );
+        $q = $query->xDriveQuery($array);
+        $message_t = $q;
     }
     /******************************************************************************/
     elseif(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt'))) {
@@ -126,6 +136,9 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
                     ),
                     array(
                         "text" => "Статус заявки"
+                    ),
+                    array(
+                        "text" => "Статистика за день"
                     )
                 )
             ),
