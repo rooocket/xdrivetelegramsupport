@@ -61,8 +61,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     /******************************************************************************/
     elseif ($message == 'Статистика за день') {
         $array = array(
-            'action' => 'request',
-            'type' => 'stat',
+            'action' => 'stat',
             'chat_id' => $chat_id
         );
         $q = $query->xDriveQuery($array);
