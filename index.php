@@ -6,7 +6,7 @@ $query = new Query();
 
 //158010101 - Саша Иванов
 //293854654 - Саша Жаров
-$admin_array = array(293854654);
+$admin_array = array(158010101);
 
 //Меня запросов
 //create_complaint - Создать жалобу
