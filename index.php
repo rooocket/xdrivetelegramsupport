@@ -2,7 +2,7 @@
 //Основной файл
 
 echo 'v.07.06.2019-0';
-
+header('Content-Type: text/html; charset= utf-8');
 include('query.php');
 $query = new Query();
 
