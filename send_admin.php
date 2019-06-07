@@ -1,5 +1,7 @@
 <?php
 
+//Сообщение админу
+
 $chat_id = $_REQUEST['chat_id'];
 $text = $_REQUEST['text'];
 

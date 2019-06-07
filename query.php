@@ -1,5 +1,5 @@
 <?php
-
+//Запросы
 
 class Query
 {

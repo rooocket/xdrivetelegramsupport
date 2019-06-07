@@ -1,4 +1,6 @@
 <?php
+//Основной файл
+
 include('query.php');
 $query = new Query();
 
