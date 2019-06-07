@@ -1,6 +1,8 @@
 <?php
 //Основной файл
 
+echo 'v.07.06.2019-0';
+
 include('query.php');
 $query = new Query();
 
