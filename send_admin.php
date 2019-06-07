@@ -1,7 +1,7 @@
 <?php
 
 //Сообщение админу
-
+header('Content-Type: text/html; charset= utf-8');
 $chat_id = $_REQUEST['chat_id'];
 $text = $_REQUEST['text'];
 
