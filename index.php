@@ -179,7 +179,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         $code = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/sms_' . $chat_id . '.txt');
 
         if($code == $message) {
-            $message_t = 'Ваш аккаунт активирован';
+            $message_t = 'Ваш аккаунт активирован. Отправьте /menu для получения инструкции.';
             $array = array(
                 'action'    => 'loginCreate',
                 'chat_id'   => $chat_id
