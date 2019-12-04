@@ -168,7 +168,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
         $q = $query->xDriveQuery($array);
 
         if($q == 0) {
-            $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . $q;
+            $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
         } else {
             $message_t = 'На Ваш номер телефона ' . $q . ' отправлено SMS-сообщение с кодом доступа.';
         }
