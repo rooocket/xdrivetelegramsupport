@@ -37,6 +37,20 @@ $param          = '';
 $error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
+ * Отправка личного сообщения
+ */
+
+if($_POST['send_message'] == 1) {
+    $chat_id = isset($_POST['chat_id']) ? $_POST['chat_id'] : '';
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
+    if(!empty($chat_id) && !empty($message)) {
+        sendMessage($chat_id, $message, $param);
+    }
+    exit();
+}
+
+
+/*
  * Проверяем была регистрация или нет
  */
 
