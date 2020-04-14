@@ -21,7 +21,10 @@ function sendMessage($chat_id, $message, $param)
 {
     $t = '%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B';
     $param = str_replace('[]','[' . $t . ']', $param);
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
+    $send = file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) .
+        $param);
+
+    var_dump($send);
 }
 
 
@@ -53,7 +56,6 @@ if($_REQUEST['send_message'] == 1) {
     if(!empty($chat_id) && !empty($message)) {
         sendMessage($chat_id, $message, $param);
     }
-    var_dump($_REQUEST);
     exit();
 }
 
