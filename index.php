@@ -33,7 +33,7 @@ $contact        = isset($output['message']['contact']['phone_number']) ? $output
 $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
-$param          = '';
+$param          = isset($_POST['param ']) ? $_POST['param '] : '';
 $error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
@@ -68,7 +68,7 @@ if(!empty(file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/' . 
     }
     /******************************************************************************/
     elseif ($message == 'Статус заявки') {
-        $message_t = $first_name . ", введите числовой номер заявки или регистрационный номер консультанта";
+        $message_t = $first_name . ", введите числовой номер заявки или регистрационный номер консультанта. ";
         $array = array(
             'action' => 'request',
             'type' => 'application_status',
