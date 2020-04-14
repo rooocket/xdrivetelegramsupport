@@ -33,16 +33,16 @@ $contact        = isset($output['message']['contact']['phone_number']) ? $output
 $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
-$param          = isset($_POST['param ']) ? $_POST['param '] : '';
+$param          = isset($_REQUEST['param ']) ? $_REQUEST['param '] : '';
 $error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
  * Отправка личного сообщения
  */
 
-if($_POST['send_message'] == 1) {
-    $chat_id = isset($_POST['chat_id']) ? $_POST['chat_id'] : '';
-    $message = isset($_POST['message']) ? $_POST['message'] : '';
+if($_REQUEST['send_message'] == 1) {
+    $chat_id = isset($_REQUEST['chat_id']) ? $_REQUEST['chat_id'] : '';
+    $message = isset($_REQUEST['message']) ? $_REQUEST['message'] : '';
     if(!empty($chat_id) && !empty($message)) {
         sendMessage($chat_id, $message, $param);
     }
