@@ -43,6 +43,7 @@ $error_text     = '';//"\n\nНапишите администратору @br0do
 
 if($_REQUEST['send_message'] == 1) {
     if(!empty($parse_mode)) {
+        //Обработка параметра
         $param .= '&parse_mode=' . $parse_mode;
     }
     $chat_id = isset($_REQUEST['chat_id']) ? $_REQUEST['chat_id'] : '';
