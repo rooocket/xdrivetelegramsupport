@@ -34,6 +34,7 @@ $first_name     = $output['message']['chat']['first_name'];
 $message        = $output['message']['text'];
 $message_t      = '';
 $param          = isset($_REQUEST['param ']) ? $_REQUEST['param '] : '';
+$parse_mode     = isset($_REQUEST['parse_mode ']) ? $_REQUEST['parse_mode '] : '';
 $error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
 
 /*
@@ -41,6 +42,9 @@ $error_text     = '';//"\n\nНапишите администратору @br0do
  */
 
 if($_REQUEST['send_message'] == 1) {
+    if(!empty($parse_mode)) {
+        $param .= '&parse_mode=' . $parse_mode;
+    }
     $chat_id = isset($_REQUEST['chat_id']) ? $_REQUEST['chat_id'] : '';
     $message = isset($_REQUEST['message']) ? $_REQUEST['message'] : '';
     if(!empty($chat_id) && !empty($message)) {
