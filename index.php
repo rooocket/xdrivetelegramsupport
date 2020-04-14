@@ -53,6 +53,7 @@ if($_REQUEST['send_message'] == 1) {
     if(!empty($chat_id) && !empty($message)) {
         sendMessage($chat_id, $message, $param);
     }
+    var_dump($_REQUEST);
     exit();
 }
 
