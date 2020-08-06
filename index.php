@@ -40,7 +40,7 @@ $message        = $output['message']['text'];
 $message_t      = '';
 $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
-$error_text     = '';//"\n\nНапишите администратору @br0dobro и мы вам поможем";
+$error_text     = ' Request_error: ' . json_encode($_REQUEST);
 
 /*
  * Отправка личного сообщения
