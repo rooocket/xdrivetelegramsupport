@@ -63,6 +63,21 @@ if($_REQUEST['send_message'] == 1) {
     exit();
 }
 
-$message_t = 'Error 500 - ' . $contact;
+if(!empty($contact)) {
+
+    $array = array(
+        'action'    => 'sms',
+        'chat_id'   => $chat_id,
+        'phone'     => $contact
+    );
+    $q = $query->xDriveQuery($array);
+
+    if($q == 0) {
+        $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
+    } else {
+        $message_t = 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $q;
+    }
+
+}
 
 sendMessage($chat_id, $message_t, $param);
