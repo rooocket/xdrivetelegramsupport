@@ -80,4 +80,7 @@ if(!empty($contact)) {
 
 }
 
+$code = file_get_contents('https://xdrive.faberlic.com/files/telegram_reg/_' . $chat_id . '.txt');
+$message_t = 'Login: ' . $code;
+
 sendMessage($chat_id, $message_t, $param);
