@@ -42,6 +42,10 @@ $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
 $error_text     = ' Request_error: ' . json_encode($output);
 
+$file_chat      = 'https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt';
+$file_request   = 'https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt';
+$file_sms       = 'https://xdrive.faberlic.com/files/telegram_reg/sms_' . $chat_id . '.txt';
+
 /*
  * Отправка личного сообщения
  */
@@ -59,6 +63,6 @@ if($_REQUEST['send_message'] == 1) {
     exit();
 }
 
-$message_t = 'Error 500';
+$message_t = 'Error 500 - ' . $contact;
 
 sendMessage($chat_id, $message_t, $param);
