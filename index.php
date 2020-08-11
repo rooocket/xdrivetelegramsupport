@@ -31,12 +31,12 @@ function sendMessage($chat_id, $message, $param)
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 $api = 'https://api.telegram.org/bot' . $access_token;
 
-
+/*
 $output         = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id        = $output['message']['chat']['id'];
 $contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
 $first_name     = $output['message']['chat']['first_name'];
-$message        = $output['message']['text'];
+$message        = $output['message']['text'];*/
 $message_t      = '';
 $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
