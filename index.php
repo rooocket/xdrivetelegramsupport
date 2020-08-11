@@ -63,7 +63,20 @@ if($_REQUEST['send_message'] == 1) {
     }
     exit();
 }
-echo $message_t;
+$array = array(
+    'action'    => 'sms',
+    'chat_id'   => $chat_id,
+    'phone'     => '79687614155'
+);
+$q = $query->xDriveQuery($array);
+
+var_dump($q);
+if($q == 0) {
+    $message_t .= 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
+} else {
+    $message_t .= 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $q;
+}
+
 $array = array(
     'action'    => 'loginCreate',
     'chat_id'   => $chat_id
@@ -74,8 +87,9 @@ var_dump($q);
 
 
 if(!empty(file_exists($file_chat))) {
-    $message_t = 'file_create';
+    $message_t .= '-file_create';
 } else {
-    $message_t = 'file_not_create';
+    $message_t .= '-file_not_create';
 }
+var_dump($message_t);
 sendMessage($chat_id, $message_t, $param);
