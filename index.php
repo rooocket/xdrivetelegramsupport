@@ -84,6 +84,7 @@ $array = array(
 $q = $query->xDriveQuery($array);
 
 echo '<pre>';
+var_dump($chat_id);
 var_dump($q);
 
 $message_t .= ' - ' . file_get_contents($file_chat) .  '  - ' . file_get_contents($file_chat_temp) .  '  - ';
