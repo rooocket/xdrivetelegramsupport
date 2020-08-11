@@ -63,11 +63,19 @@ if($_REQUEST['send_message'] == 1) {
     }
     exit();
 }
+echo $message_t;
+$array = array(
+    'action'    => 'loginCreate',
+    'chat_id'   => $chat_id
+);
+$q = $query->xDriveQuery($array);
+
+var_dump($q);
+
 
 if(!empty(file_exists($file_chat))) {
     $message_t = 'file_create';
 } else {
     $message_t = 'file_not_create';
 }
-echo $message_t;
 sendMessage($chat_id, $message_t, $param);
