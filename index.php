@@ -41,7 +41,7 @@ $message_t      = '';
 $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
 $error_text     = ' Request_error: ' . $message_t;
-
+$chat_id = 210365779;
 $file_chat_temp = 'https://xdrive.faberlic.com/files/telegram_reg/_' . $chat_id . '.txt';
 $file_chat      = 'https://xdrive.faberlic.com/files/telegram_reg/' . $chat_id . '.txt';
 $file_request   = 'https://xdrive.faberlic.com/files/telegram_reg/request_' . $chat_id . '.txt';
