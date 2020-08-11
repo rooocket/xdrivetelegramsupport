@@ -69,5 +69,5 @@ if(!empty(file_exists($file_chat))) {
 } else {
     $message_t = 'file_not_create';
 }
-
+echo $message_t;
 sendMessage($chat_id, $message_t, $param);
