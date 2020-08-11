@@ -89,7 +89,7 @@ var_dump($q);
 
 $message_t .= ' - ' . file_get_contents($file_chat) .  '  - ' . file_get_contents($file_chat_temp) .  '  - ';
 
-if(!empty(file_exists($file_chat))) {
+if(file_exists($file_chat)) {
     $message_t .= '-file_create';
 } else {
     $message_t .= '-file_not_create';
