@@ -83,6 +83,7 @@ $array = array(
 );
 $q = $query->xDriveQuery($array);
 
+echo '<pre>';
 var_dump($q);
 
 $message_t .= ' - ' . file_get_contents($file_chat) .  '  - ' . file_get_contents($file_chat_temp) .  '  - ';
@@ -93,4 +94,5 @@ if(!empty(file_exists($file_chat))) {
     $message_t .= '-file_not_create';
 }
 var_dump($message_t);
+echo '</pre>';
 sendMessage($chat_id, $message_t, $param);
