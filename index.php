@@ -31,7 +31,7 @@ $output         = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id        = $output['message']['chat']['id'];
 $contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
 $first_name     = $output['message']['chat']['first_name'];
-$message        = $output['message']['text'];
+$message        = trim($output['message']['text']);
 $message_t      = '';
 $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
@@ -194,7 +194,7 @@ if($user_info) {
 
 
                         if($q == 0) {
-                            $message_t = 'Ошибка добавления заявки. - ' . json_decode($m_arr) . ' - ' . json_decode($array) . ' - ' . $message;
+                            $message_t = 'Ошибка добавления заявки. - ' . $m_arr . ' - ' . json_decode($m_arr) . ' - ' . json_decode($array) . ' - ' . $message;
                         } elseif($q == 2) {
                             $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1];
                         } else {
