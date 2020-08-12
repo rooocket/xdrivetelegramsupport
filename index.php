@@ -11,6 +11,7 @@ $query = new Query();
 //158010101 - Саша Иванов
 //293854654 - Саша Жаров
 $admin_array = array(158010101, 293854654); //для теста
+$access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 define('API','https://api.telegram.org/bot' . $access_token);
 
 //Меня запросов
@@ -29,7 +30,6 @@ function sendMessage($chat_id, $message, $param)
 }
 sendMessage(293854654, 'hello', '');
 
-$access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 $api = 'https://api.telegram.org/bot' . $access_token;
 
 exit();
