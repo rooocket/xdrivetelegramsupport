@@ -92,7 +92,8 @@ if($user_info) {
             if($q == 0) {
                 $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
             } else {
-                $message_t = 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $q;
+                $phone = preg_replace('![^0-9]+!', '', $contact);
+                $message_t = 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $phone;
             }
         } else {
 
@@ -116,13 +117,124 @@ if($user_info) {
         }
     } else {
 
+        if(empty($user_info_row->request)) {
+
+            /******************************************************************************/
+            if($message == 'Создать жалобу') {
+                $message_t = $first_name . ", Введите 9-тизначный регистрационный номер заявки и текст сообщения, по которой у вас жалоба.\n\nПример, 71******* слишком молодая девушка";
+                $array = array(
+                    'action' => 'request_update',
+                    'type' => 'create_complaint',
+                    'chat_id' => $chat_id
+                );
+                $q = $query->xDriveQuery($array);
+            }
+            /******************************************************************************/
+            elseif ($message == 'Статус заявки') {
+                $message_t = $first_name . ", введите числовой номер заявки или регистрационный номер консультанта. ";
+                $array = array(
+                    'action' => 'request_update',
+                    'type' => 'application_status',
+                    'chat_id' => $chat_id
+                );
+                $q = $query->xDriveQuery($array);
+            }
+            /******************************************************************************/
+            elseif ($message == 'Статистика за день') {
+                $array = array(
+                    'action' => 'stat',
+                    'chat_id' => $chat_id
+                );
+                $q = $query->xDriveQuery($array);
+                $message_t = $q;
+            }
+            /******************************************************************************/
+            elseif($message == '/chat_id') {
+                $message_t = 'Ваш Chat_id: ' . $chat_id;
+            }
+            /******************************************************************************/
+            else {
+                $keyboard = array(
+                    "keyboard" => array(
+                        array(
+                            array(
+                                "text" => "Создать жалобу"
+                            ),
+                            array(
+                                "text" => "Статус заявки"
+                            ),
+                            array(
+                                "text" => "Статистика за день"
+                            )
+                        )
+                    ),
+                    "one_time_keyboard" => false, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+                    "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+                );
+
+                $message_t = "Привет, " . $first_name . ".\n\nЕсли хотите пожаловаться на заявку - Нажмите на кнопку «Создать жалобу», если хотите проверить статус выполнения заявки - «Статус заявки» под клавиатурой.";
+                $param = '&reply_markup=' . json_encode($keyboard);
+            }
+            /******************************************************************************/
+        } else {
+            //Если выполняется сложный запрос с вводом
+            $type = $user_info_row->request;
+            if($type == 'create_complaint') {
+                preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
+                if(!empty($m_arr[1][0]) && !empty($m_arr[2][0])) {
+
+                    if(strlen($m_arr[1][0]) == 9) {
+                        $array = array(
+                            'action'    => 'add',
+                            'number'    => $m_arr[1][0],
+                            'text'      => trim($m_arr[2][0]),
+                            'chat_id'   => $chat_id
+                        );
+                        $q = $query->xDriveQuery($array);
+
+
+                        if($q == 0) {
+                            $message_t = 'Ошибка добавления заявки.' . $error_text;
+                        } elseif($q == 2) {
+                            $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1][0] . $error_text;
+                        } else {
+                            $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
+                        }
+                    } else {
+                        $message_t = "Ошибка!\n\nНеправильно введен регистрационный номер консультанта.\n\nПример, 71******* слишком молодая девушка";
+                    }
+
+
+                } else {
+                    $message_t = "Не правильно введен запрос.\n\nПример, 71******* слишком молодая девушка";
+                }
+            }
+            elseif($type == 'application_status') {
+                $id = preg_replace('![^0-9]+!', '', $message);
+                $array = array(
+                    'action'    => 'find',
+                    'id'        => $id,
+                    'chat_id'   => $chat_id
+                );
+                $q = $query->xDriveQuery($array);
+
+                if($q == 0) {
+                    $message_t = 'Заявка не найдена.' . $error_text;
+                } else {
+                    $message_t = $q;
+                }
+
+                $message_t = $q;
+            }
+            else {
+                $message_t = 'Ошибка выполнения запроса. ' . $error_text;
+            }
+        }
+
+
     }
 
 
-    /******************************************************************************/
-    if($message == '/chat_id') {
-        $message_t = 'Ваш Chat_id: ' . $chat_id;
-    }
     /******************************************************************************/
 
 } else {
