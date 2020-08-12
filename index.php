@@ -36,24 +36,9 @@ $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
 $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
 $error_text     = ' Request_error: ' . $message_t;
 
-if(!empty($contact)) {
-    $message_t = $contact;
-} else {
-    $keyboard = array(
-        "keyboard" => array(
-            array(
-                array(
-                    "text" => "Отправить номер телефона",
-                    "request_contact" => true // Данный запрос необязательный telegram button для запроса номера телефона
+//Проверяем, есьб ли аккаунт в телеграме
+$user_info      = $query->xDriveQuery(array('action'=>'check_user','chat_id'=>158010101));
 
-                )
-            )
-        ),
-        "one_time_keyboard" => false, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-        "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
-    );
+$message_t = $user_info;
 
-    $message_t = "Привет, " . $first_name . ".\n\nМеня зовут xDriveSupportBot. Чтобы мной воспользоваться, необходимо подтвердить свой номер телефона. Такой же номер телефона должен быть указан в вашем личном кабинете xDrive.\n\nНажмите на кнопку «Отправить номер телефона» под клавиатурой.";
-    $param = '&reply_markup=' . json_encode($keyboard);
-}
 sendMessage($chat_id, $message_t, $param);
