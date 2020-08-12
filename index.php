@@ -106,5 +106,7 @@ if($user_info) {
         $param = '&reply_markup=' . json_encode($keyboard);
     }
 }
-
+if($contact) {
+    $message_t .= ' Contact: ' . $contact;
+}
 sendMessage($chat_id, $message_t, $param);
