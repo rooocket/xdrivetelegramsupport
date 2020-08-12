@@ -23,16 +23,9 @@ function sendMessage($chat_id, $message, $param)
 {
     $t = '%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B';
     $param = str_replace('[]','[' . $t . ']', $param);
-    $send = file_get_contents(API . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) .
-        $param);
-
-    var_dump($send, $GLOBALS['api']);
+    $send = file_get_contents(API . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
 }
-sendMessage(293854654, 'hello', '');
 
-$api = 'https://api.telegram.org/bot' . $access_token;
-
-exit();
 $output         = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id        = $output['message']['chat']['id'];
 $contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
