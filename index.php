@@ -24,9 +24,10 @@ function sendMessage($chat_id, $message, $param)
     $send = file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) .
         $param);
 
-    var_dump($send);
+    var_dump($send, $GLOBALS['api']);
 }
-
+sendMessage(293854654, 'hello', '');
+exit();
 
 $access_token = '762331141:AAGztjW4kC40IHXY8yY3SrRjeVDtVeM0V0U';
 $api = 'https://api.telegram.org/bot' . $access_token;
