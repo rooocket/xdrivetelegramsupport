@@ -107,5 +107,5 @@ if($user_info) {
     }
 }
 
-
+$message_t = $user_info;
 sendMessage($chat_id, $message_t, $param);
