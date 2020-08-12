@@ -24,6 +24,7 @@ function sendMessage($chat_id, $message, $param)
     $t = '%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B';
     $param = str_replace('[]','[' . $t . ']', $param);
     $send = file_get_contents(API . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message) . $param);
+    return $send;
 }
 
 $output         = json_decode(file_get_contents('php://input'), TRUE);
@@ -38,7 +39,7 @@ $error_text     = ' Request_error: ' . $message_t;
 
 //Проверяем, есьб ли аккаунт в телеграме
 $user_info      = $query->xDriveQuery(array('action'=>'check_user','chat_id'=>158010101));
-
+var_dump($user_info);
 $message_t = $user_info;
 
 sendMessage($chat_id, $message_t, $param);
