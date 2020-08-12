@@ -194,7 +194,7 @@ if($user_info) {
 
 
                         if($q == 0) {
-                            $message_t = 'Ошибка добавления заявки.' . json_decode($m_arr) . ' - ' . $message;
+                            $message_t = 'Ошибка добавления заявки.' . json_decode($m_arr) . ' - ' . json_decode($array) . ' - ' . $message;
                         } elseif($q == 2) {
                             $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1];
                         } else {
