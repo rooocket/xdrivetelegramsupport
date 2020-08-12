@@ -41,29 +41,8 @@ $error_text     = ' Request_error: ' . $message_t;
 $user_info      = $query->xDriveQuery(array('action'=>'check_user','chat_id'=>$chat_id));
 
 if($user_info) {
-    $message_t .= $user_info;
-} else {
-    //Формируем регистрацию
     $number = preg_replace('![^0-9]+!', '', $message); //Осталяем только цифры
-    /******************************************************************************/
-    if(!empty($contact)) {
-
-        $array = array(
-            'action'    => 'sms',
-            'chat_id'   => $chat_id,
-            'phone'     => $contact
-        );
-        $q = $query->xDriveQuery($array);
-
-        if($q == 0) {
-            $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
-        } else {
-            $message_t = 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $q;
-        }
-
-    }
-    /******************************************************************************/
-    elseif(strlen($number) == 4) {
+    if(strlen($number) == 4) {
         $array = array(
             'action'    => 'request',
             'chat_id'   => $chat_id
@@ -80,6 +59,32 @@ if($user_info) {
         } else {
             $message_t = 'Вы ввели неверный пароль для подтверждения.';
         }
+    }
+    /******************************************************************************/
+    elseif($message == '/chat_id') {
+        $message_t = 'Ваш Chat_id: ' . $chat_id;
+    }
+    /******************************************************************************/
+
+} else {
+    //Формируем регистрацию
+
+    /******************************************************************************/
+    if(!empty($contact)) {
+
+        $array = array(
+            'action'    => 'sms',
+            'chat_id'   => $chat_id,
+            'phone'     => $contact
+        );
+        $q = $query->xDriveQuery($array);
+
+        if($q == 0) {
+            $message_t = 'Я не могу предоставить Вам доступ.' .$error_text . ' [' . $q . ']';
+        } else {
+            $message_t = 'Для завершения регистрации, пришлите код из SMS, отправленный на номер: +' . $q;
+        }
+
     }
     /******************************************************************************/
     elseif($message == '/chat_id') {
@@ -106,7 +111,5 @@ if($user_info) {
         $param = '&reply_markup=' . json_encode($keyboard);
     }
 }
-if($contact) {
-    $message_t .= ' Contact: ' . $contact;
-}
+
 sendMessage($chat_id, $message_t, $param);
