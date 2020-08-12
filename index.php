@@ -227,7 +227,7 @@ if($user_info) {
                 $message_t = $q;
             }
             else {
-                $message_t = 'Ошибка выполнения запроса. ' . $error_text;
+                $message_t = 'Ошибка выполнения запроса. Тип запроса не найден. ' . $error_text;
             }
         }
 
