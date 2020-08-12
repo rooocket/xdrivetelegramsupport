@@ -180,14 +180,14 @@ if($user_info) {
             //Если выполняется сложный запрос с вводом
             $type = $user_info_row->request;
             if($type == 'create_complaint') {
-                preg_match_all("/([0-9]*)(.*)/",$message,$m_arr);
-                if(!empty($m_arr[1][0]) && !empty($m_arr[2][0])) {
+                preg_match("/([0-9]*) (.*)/",$message,$m_arr);
+                if(!empty($m_arr[1]) && !empty($m_arr[2])) {
 
-                    if(strlen($m_arr[1][0]) == 9) {
+                    if(strlen($m_arr[1]) == 9) {
                         $array = array(
                             'action'    => 'add',
-                            'number'    => $m_arr[1][0],
-                            'text'      => trim($m_arr[2][0]),
+                            'number'    => $m_arr[1],
+                            'text'      => trim($m_arr[2]),
                             'chat_id'   => $chat_id
                         );
                         $q = $query->xDriveQuery($array);
@@ -196,7 +196,7 @@ if($user_info) {
                         if($q == 0) {
                             $message_t = 'Ошибка добавления заявки.' . json_decode($m_arr);
                         } elseif($q == 2) {
-                            $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1][0] . $error_text;
+                            $message_t = 'В xDrive нет консультанта с регистрационным номером ' . $m_arr[1] . $error_text;
                         } else {
                             $message_t = 'Вашей заявке присвоен №' . $q . '. Мы отправим вам ответ в ближайшее время.';
                         }
