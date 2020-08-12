@@ -41,7 +41,7 @@ $error_text     = ' Request_error: ' . $message_t;
 $user_info      = $query->xDriveQuery(array('action'=>'check_user','chat_id'=>$chat_id));
 
 if($user_info) {
-
+    $message_t .= $user_info;
 } else {
     //Формируем регистрацию
     $number = preg_replace('![^0-9]+!', '', $message); //Осталяем только цифры
