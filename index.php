@@ -27,6 +27,26 @@ function sendMessage($chat_id, $message, $param)
     return $send;
 }
 
+
+/*
+ * Отправка личного сообщения
+ */
+
+if($_REQUEST['send_message'] == 1) {
+    if(!empty($parse_mode)) {
+        //Обработка параметра
+        $param .= '&parse_mode=' . $parse_mode;
+    }
+    $chat_id = isset($_REQUEST['chat_id']) ? $_REQUEST['chat_id'] : '';
+    $message = isset($_REQUEST['message']) ? $_REQUEST['message'] : '';
+    if(!empty($chat_id) && !empty($message)) {
+        sendMessage($chat_id, $message, $param);
+    }
+    exit();
+}
+
+
+
 $output         = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id        = $output['message']['chat']['id'];
 $contact        = isset($output['message']['contact']['phone_number']) ? $output['message']['contact']['phone_number'] : '';
