@@ -33,6 +33,10 @@ function sendMessage($chat_id, $message, $param)
  */
 
 if($_REQUEST['send_message'] == 1) {
+
+    $param          = isset($_REQUEST['param']) ? $_REQUEST['param'] : '';
+    $parse_mode     = isset($_REQUEST['parse_mode']) ? $_REQUEST['parse_mode'] : '';
+
     if(!empty($parse_mode)) {
         //Обработка параметра
         $param .= '&parse_mode=' . $parse_mode;
