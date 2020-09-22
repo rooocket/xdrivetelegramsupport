@@ -202,6 +202,28 @@ if($user_info) {
             }
             /******************************************************************************/
         } else {
+
+
+            $keyboard = array(
+                "keyboard" => array(
+                    array(
+                        array(
+                            "text" => "Создать жалобу"
+                        ),
+                        array(
+                            "text" => "Статус заявки"
+                        ),
+                        array(
+                            "text" => "Статистика за день"
+                        )
+                    )
+                ),
+                "one_time_keyboard" => false, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
+                "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
+            );
+
+            $param = '&reply_markup=' . json_encode($keyboard);
+
             //Если выполняется сложный запрос с вводом
             $type = $user_info_row->request;
             if($type == 'create_complaint') {
@@ -252,27 +274,7 @@ if($user_info) {
                 $message_t = $q;
             }
             else {
-
-                $keyboard = array(
-                    "keyboard" => array(
-                        array(
-                            array(
-                                "text" => "Создать жалобу"
-                            ),
-                            array(
-                                "text" => "Статус заявки"
-                            ),
-                            array(
-                                "text" => "Статистика за день"
-                            )
-                        )
-                    ),
-                    "one_time_keyboard" => false, // можно заменить на FALSE,клавиатура скроется после нажатия кнопки автоматически при True
-                    "resize_keyboard" => false // можно заменить на FALSE, клавиатура будет использовать компактный размер автоматически при True
-                );
-
                 $message_t = 'Ошибка выполнения запроса. Тип запроса не найден. ' . $error_text;
-                $param = '&reply_markup=' . json_encode($keyboard);
             }
         }
 
