@@ -1,7 +1,7 @@
 <?php
 //Основной файл
 
-echo 'v.27.12.2020';
+echo 'v.27.12.2020-2';
 header('Content-Type: text/html; charset= utf-8');
 include('query.php');
 $query = new Query();
@@ -214,7 +214,7 @@ if(!empty($user_info_row) && $user_info_row->active == 1) {
             'chat_id'   => $chat_id
         );
         $q = $query->xDriveQuery($array);
-    } elseif ($my_request == '') {
+    } elseif ($my_request == 'wait_login') {
         //Вводи логина и пароля
 
         $array = array(
